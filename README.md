@@ -1,6 +1,6 @@
 # easy_debounce
 
-A simple debouncer package for Dart/Flutter.
+An extremely easy-to-use method call debouncer package for Dart/Flutter.
 
 Debouncing is needed when there is a possibility of multiple calls to a method being made within a short duration of each other, and it's desireable that only the last of those calls actually invoke the target method.
 
@@ -10,7 +10,7 @@ So basically each call starts a timer, and if another call happens before the ti
 
 Add `easy_debounce` as a [dependency](https://flutter.dev/docs/development/packages-and-plugins/using-packages) in `pubspec.yaml`:
  
-      easy_debounce: ^0.0.1 <-- Replace with desired minimum version
+      easy_debounce: ^1.0.0 <-- Replace with desired minimum version
 
 ## Usage
 

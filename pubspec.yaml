@@ -1,6 +1,6 @@
 name: easy_debounce
-description: A simple debouncer package for Dart/Flutter.
-version: 0.0.1
+description: An extremely easy-to-use method call debouncer package for Dart/Flutter.
+version: 1.0.0
 author: Magnus Wikhög <magnus@magnuswikhog.com>
 homepage: https://github.com/magnuswikhog/easy_debounce
 
