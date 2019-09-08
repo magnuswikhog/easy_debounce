@@ -1,0 +1,18 @@
+name: easy_debounce
+description: A simple debouncer package for Dart/Flutter.
+version: 0.0.1
+author: Magnus Wikhög <magnus@magnuswikhog.com>
+homepage: https://github.com/magnuswikhog/easy_debounce
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
