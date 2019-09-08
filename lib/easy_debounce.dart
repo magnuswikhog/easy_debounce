@@ -17,16 +17,25 @@ class EasyDebounce {
   ///
   /// [tag] is any arbitrary String, and is used to identify this particular debounce
   /// operation in subsequent calls to [debounce()] or [cancel()].
+  ///
+  /// If [duration] is `Duration.zero`, [onExecute] will be executed immediately, i.e.
+  /// synchronously.
   static void debounce(
       String tag, Duration duration, EasyDebounceCallback onExecute) {
-    if (_timers[tag]?.isActive == true) _timers[tag].cancel();
-
-    _timers[tag] = Timer(duration, () {
+    if (duration == Duration.zero) {
       _timers[tag]?.cancel();
       _timers.remove(tag);
-
       onExecute();
-    });
+    } else {
+      _timers[tag]?.cancel();
+
+      _timers[tag] = Timer(duration, () {
+        _timers[tag]?.cancel();
+        _timers.remove(tag);
+
+        onExecute();
+      });
+    }
   }
 
   /// Cancels any active debounce operation with the given [tag].

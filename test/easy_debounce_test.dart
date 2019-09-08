@@ -113,4 +113,28 @@ void main() {
     EasyDebounce.cancel('test1');
   });
 
+
+  test('zero-duration should execute target method synchronously', () async {
+    int test = 1;
+
+    var onExecute = expectAsync0((){
+      expect(test--, 1);
+    }, count: 1);
+
+    EasyDebounce.debounce('test1', Duration.zero, () => onExecute());
+    expect(test, 0);
+  });
+
+
+  test('non-zero duration should execute target method asynchronously', () async {
+    int test = 1;
+
+    var onExecute = expectAsync0((){
+      expect(test, 0);
+    }, count: 1);
+
+    EasyDebounce.debounce('test1', Duration(microseconds: 1), () => onExecute());
+    expect(test--, 1);
+  });
+
 }
