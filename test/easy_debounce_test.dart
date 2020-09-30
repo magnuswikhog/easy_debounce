@@ -74,19 +74,6 @@ void main() {
   });
 
 
-  test('cancel() cancels a debouncer', () async {
-    var onExecute = expectAsync0((){}, count: 0);
-
-    EasyDebounce.debounce('test1', Duration(milliseconds: 1000), () => onExecute());
-    EasyDebounce.debounce('test2', Duration(milliseconds: 1000), () => onExecute());
-    EasyDebounce.debounce('test3', Duration(milliseconds: 1000), () => onExecute());
-
-    EasyDebounce.cancel('test1');
-    EasyDebounce.cancel('test2');
-    EasyDebounce.cancel('test3');
-  });
-
-
   test('count() returns the number of active debouncers', () async {
     int iExpected = 2;
 
@@ -97,6 +84,19 @@ void main() {
     EasyDebounce.debounce('test1', Duration(milliseconds: 100), () => onExecute());
     EasyDebounce.debounce('test2', Duration(milliseconds: 100), () => onExecute());
     EasyDebounce.debounce('test3', Duration(milliseconds: 100), () => onExecute());
+  });
+
+
+  test('cancel() cancels a debouncer', () async {
+    var onExecute = expectAsync0((){}, count: 0);
+
+    EasyDebounce.debounce('test1', Duration(milliseconds: 1000), () => onExecute());
+    EasyDebounce.debounce('test2', Duration(milliseconds: 1000), () => onExecute());
+    EasyDebounce.debounce('test3', Duration(milliseconds: 1000), () => onExecute());
+
+    EasyDebounce.cancel('test1');
+    EasyDebounce.cancel('test2');
+    EasyDebounce.cancel('test3');
   });
 
 
@@ -111,6 +111,11 @@ void main() {
     EasyDebounce.debounce('test2', Duration(milliseconds: 100), () => onExecute());
     EasyDebounce.debounce('test3', Duration(milliseconds: 100), () => onExecute());
     EasyDebounce.cancel('test1');
+  });
+
+
+  test('calling cancel() on a non-existing tag doesn\'t cause an exception', () async {
+    EasyDebounce.cancel('non-existing tag');
   });
 
 
@@ -136,5 +141,6 @@ void main() {
     EasyDebounce.debounce('test1', Duration(microseconds: 1), () => onExecute());
     expect(test--, 1);
   });
+
 
 }
