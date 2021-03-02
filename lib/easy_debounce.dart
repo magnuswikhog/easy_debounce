@@ -2,6 +2,8 @@ library easy_debounce;
 
 import 'dart:async';
 
+import 'package:meta/meta.dart' show required;
+
 /// A void callback, i.e. (){}, so we don't need to import e.g. `dart.ui`
 /// just for the VoidCallback type definition.
 typedef EasyDebounceCallback = void Function();
@@ -20,8 +22,11 @@ class EasyDebounce {
   ///
   /// If [duration] is `Duration.zero`, [onExecute] will be executed immediately, i.e.
   /// synchronously.
-  static void debounce(
-      String tag, Duration duration, EasyDebounceCallback onExecute) {
+  static void debounce({
+    @required String tag,
+    @required Duration duration,
+    @required EasyDebounceCallback onExecute,
+  }) {
     if (duration == Duration.zero) {
       _timers[tag]?.cancel();
       _timers.remove(tag);
