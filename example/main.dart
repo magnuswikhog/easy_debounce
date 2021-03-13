@@ -3,7 +3,7 @@ import 'package:easy_debounce/easy_debounce.dart';
 
 
 
-void myMethod(String message){
+void myMethod(String? message){
     print(message);
 }
 
