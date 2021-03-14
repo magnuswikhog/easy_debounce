@@ -20,8 +20,11 @@ class EasyDebounce {
   ///
   /// If [duration] is `Duration.zero`, [onExecute] will be executed immediately, i.e.
   /// synchronously.
-  static void debounce(
-      String tag, Duration duration, EasyDebounceCallback onExecute) {
+  static void debounce({
+    required String tag,
+    required Duration duration,
+    required EasyDebounceCallback onExecute,
+  }) {
     if (duration == Duration.zero) {
       _timers[tag]?.cancel();
       _timers.remove(tag);
