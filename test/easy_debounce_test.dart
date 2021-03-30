@@ -21,8 +21,8 @@ void main() {
 
     var onExecute = expectAsync0((){
       Duration startStopDiff = DateTime.now().difference(start);
-      int actualExpectedDiff_ms = (startStopDiff.inMilliseconds.abs() - 1000).abs();
-      expect( actualExpectedDiff_ms < 100, true ); // 100 ms is reasonable
+      int actualExpectedDiffMs = (startStopDiff.inMilliseconds.abs() - 1000).abs();
+      expect( actualExpectedDiffMs < 100, true ); // 100 ms is reasonable
     }, count: 1);
 
     Duration duration = Duration(milliseconds: 1000);
@@ -35,8 +35,8 @@ void main() {
 
     var onExecute = expectAsync0((){
       Duration startStopDiff = DateTime.now().difference(start);
-      int actualExpectedDiff_ms = (startStopDiff.inMilliseconds.abs() - 1100).abs();
-      expect( actualExpectedDiff_ms < 100, true ); // 100 ms is reasonable
+      int actualExpectedDiffMs = (startStopDiff.inMilliseconds.abs() - 1100).abs();
+      expect( actualExpectedDiffMs < 100, true ); // 100 ms is reasonable
     }, count: 1);
 
     for(int i=0; i<5; i++){

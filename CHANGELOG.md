@@ -1,3 +1,7 @@
+## [2.0.0] March 30, 2021
+**Breaking changes**
+- Bumped SDK version constraint to support null safety.
+
 ## [1.0.2] September 30, 2020
 Added a null check when cancelling a timer. 
 
