@@ -6,9 +6,15 @@ import 'dart:async';
 /// just for the VoidCallback type definition.
 typedef EasyDebounceCallback = void Function();
 
+class _EasyDebounceOperation{
+  EasyDebounceCallback callback;
+  Timer timer;
+  _EasyDebounceOperation(this.callback, this.timer);
+}
+
 /// A static class for handling method call debouncing.
 class EasyDebounce {
-  static Map<String, Timer> _timers = {};
+  static Map<String, _EasyDebounceOperation> _operations = {};
 
   /// Will delay the execution of [onExecute] with the given [duration]. If another call to
   /// debounce() with the same [tag] happens within this duration, the first call will be
@@ -23,30 +29,48 @@ class EasyDebounce {
   static void debounce(
       String tag, Duration duration, EasyDebounceCallback onExecute) {
     if (duration == Duration.zero) {
-      _timers[tag]?.cancel();
-      _timers.remove(tag);
+      _operations[tag]?.timer.cancel();
+      _operations.remove(tag);
       onExecute();
     } else {
-      _timers[tag]?.cancel();
+      _operations[tag]?.timer.cancel();
 
-      _timers[tag] = Timer(duration, () {
-        _timers[tag]?.cancel();
-        _timers.remove(tag);
+      _operations[tag] = _EasyDebounceOperation(
+        onExecute,
+        Timer(duration, () {
+          _operations[tag]?.timer.cancel();
+          _operations.remove(tag);
 
-        onExecute();
-      });
+          onExecute();
+        })
+      );
     }
+  }
+
+  /// Fires the callback associated with [tag] immediately. This does not cancel the debounce timer,
+  /// so if you want to invoke the callback and cancel the debounce timer, you must first call
+  /// `fire(tag)` and then `cancel(tag)`.
+  static void fire(String tag){
+    _operations[tag]?.callback();
   }
 
   /// Cancels any active debounce operation with the given [tag].
   static void cancel(String tag) {
-    _timers[tag]?.cancel();
-    _timers.remove(tag);
+    _operations[tag]?.timer.cancel();
+    _operations.remove(tag);
+  }
+
+  /// Cancels all active debouncers.
+  static void cancelAll() {
+    for(final operation in _operations.values){
+      operation.timer.cancel();
+    }
+    _operations.clear();
   }
 
   /// Returns the number of active debouncers (debouncers that haven't yet called their
   /// [onExecute] methods).
   static int count() {
-    return _timers.length;
+    return _operations.length;
   }
 }

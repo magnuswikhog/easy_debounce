@@ -1,3 +1,7 @@
+## [2.0.1] August 17, 2021
+- Added the `fire()` -method for manually executing a debouncer target method.
+- Added the `cancelAll()` -method for cancelling all debouncers.  
+
 ## [2.0.0] March 30, 2021
 **Breaking changes**
 - Bumped SDK version constraint to support null safety.

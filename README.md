@@ -32,10 +32,23 @@ The above call will invoke `myMethod()` after 500 ms, unless another call to `de
 A debouncer which hasn't yet executed its target function can be called by calling `cancel()` with the debouncers `tag`:
 
     EasyDebounce.cancel('my-debouncer');
-    
+
+To cancel all active debouncers, call `cancelAll()`:
+
+    EasyDebounce.cancelAll();
+        
     
 #### Counting active debouncers
 
 You can get the number of active debouncers (debouncers which haven't yet executed their target methods) by calling `count()`:
 
     print('Active debouncers: ${EasyDebounce.count()}'); 
+    
+    
+#### Fire a debouncer target function manually
+
+If you need to fire the target function of a debouncer before the timer executes, you can call `fire()`:
+
+    EasyDebounce.fire('my-debouncer');
+    
+This will execute the debouncers target function, but the debounce timer will keep running unless you also call `cancel()`.   

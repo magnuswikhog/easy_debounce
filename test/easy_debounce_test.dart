@@ -142,5 +142,30 @@ void main() {
     expect(test--, 1);
   });
 
+  test('calling fire() should execute the callback immediately', () async {
+    var onExecute = expectAsync0((){}, count: 1);
+
+    EasyDebounce.debounce('test1', Duration(seconds: 1), () => onExecute());
+    EasyDebounce.fire('test1');
+    EasyDebounce.cancel('test1');
+  });
+
+  test('calling fire() should not remove the debounce timer', () async {
+    var onExecute = expectAsync0((){}, count: 2);
+
+    EasyDebounce.debounce('test1', Duration(seconds: 1), () => onExecute());
+    EasyDebounce.fire('test1');
+  });
+
+  test('cancelAll() cancels and removes all timers', () async {
+    var onExecute = expectAsync0((){}, count: 0);
+
+    EasyDebounce.debounce('test1', Duration(milliseconds: 1000), () => onExecute());
+    EasyDebounce.debounce('test2', Duration(milliseconds: 1000), () => onExecute());
+    EasyDebounce.debounce('test3', Duration(milliseconds: 1000), () => onExecute());
+
+    EasyDebounce.cancelAll();
+    expect(EasyDebounce.count(), 0);
+  });
 
 }

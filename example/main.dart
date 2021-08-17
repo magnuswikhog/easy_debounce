@@ -76,5 +76,28 @@ void main() async {
     EasyDebounce.debounce('debouncer6', Duration(milliseconds: 10), (){ ++y; myMethod('Executing debouncer6! (y: $y)'); });
     print('After debouncer6: y: $y');
 
+
+    // Make sure the above example finishes before continuting
+    await Future.delayed(Duration(milliseconds: 400));
+
+
+    // Example 6
+    // When calling fire(), the callback associated with the soecified tag is called immediately. The callback timer is not
+    // removed, so if you do not cancel the debouncer after calling fire(), it will still execute after the debounce duration.
+    // The output of the code below would be:
+    // Executing debouncer7! (z: 1)
+    // After debouncer7: z: 1
+    // Executing debouncer7! (z: 2)
+    print('\nExample 6');
+    int z = 0;
+    EasyDebounce.debounce('debouncer7', Duration(milliseconds: 10), (){ ++z; myMethod('Executing debouncer7! (z: $z)'); });
+    EasyDebounce.fire('debouncer7');
+    print('After debouncer7: z: $z');
+
+
+    // Make sure the above example finishes before continuting
+    await Future.delayed(Duration(milliseconds: 400));
+
+
 }
 
