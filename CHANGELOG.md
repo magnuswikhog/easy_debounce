@@ -1,3 +1,6 @@
+## [2.1.0] December 22, 2021
+- Removed dependency of Flutter SDK
+
 ## [2.0.1] August 17, 2021
 - Added the `fire()` -method for manually executing a debouncer target method.
 - Added the `cancelAll()` -method for cancelling all debouncers.  
