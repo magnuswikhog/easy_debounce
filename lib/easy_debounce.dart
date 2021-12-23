@@ -6,7 +6,7 @@ import 'dart:async';
 /// just for the VoidCallback type definition.
 typedef EasyDebounceCallback = void Function();
 
-class _EasyDebounceOperation{
+class _EasyDebounceOperation {
   EasyDebounceCallback callback;
   Timer timer;
   _EasyDebounceOperation(this.callback, this.timer);
@@ -36,21 +36,20 @@ class EasyDebounce {
       _operations[tag]?.timer.cancel();
 
       _operations[tag] = _EasyDebounceOperation(
-        onExecute,
-        Timer(duration, () {
-          _operations[tag]?.timer.cancel();
-          _operations.remove(tag);
+          onExecute,
+          Timer(duration, () {
+            _operations[tag]?.timer.cancel();
+            _operations.remove(tag);
 
-          onExecute();
-        })
-      );
+            onExecute();
+          }));
     }
   }
 
   /// Fires the callback associated with [tag] immediately. This does not cancel the debounce timer,
   /// so if you want to invoke the callback and cancel the debounce timer, you must first call
   /// `fire(tag)` and then `cancel(tag)`.
-  static void fire(String tag){
+  static void fire(String tag) {
     _operations[tag]?.callback();
   }
 
@@ -62,7 +61,7 @@ class EasyDebounce {
 
   /// Cancels all active debouncers.
   static void cancelAll() {
-    for(final operation in _operations.values){
+    for (final operation in _operations.values) {
       operation.timer.cancel();
     }
     _operations.clear();
