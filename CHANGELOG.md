@@ -1,3 +1,10 @@
+## [2.0.2] December 23, 2021
+- Removed dependency on Flutter SDK (this package is now a pure Dart package)
+- Removed pubspec.lock from repo
+- Dart formatting
+
+  _Thanks to Nils Reichardt_ 
+
 ## [2.0.1] August 17, 2021
 - Added the `fire()` -method for manually executing a debouncer target method.
 - Added the `cancelAll()` -method for cancelling all debouncers.  
