@@ -6,14 +6,6 @@ Debouncing is needed when there is a possibility of multiple calls to a method b
 
 So basically each call starts a timer, and if another call happens before the timer executes, the timer is reset and starts waiting for the desired duration again. When the timer finally does time out, the target method is invoked. 
 
-## Installation
-
-Add `easy_debounce` as a [dependency](https://flutter.dev/docs/development/packages-and-plugins/using-packages) in `pubspec.yaml`:
- 
-      easy_debounce: ^2.0.0 <-- Replace with desired minimum version
-
-Version 2.0.0 is null-safe, previous versions are not (and will therefore work with lower SDK versions). 
-
 ## Usage
 
 #### Debouncing

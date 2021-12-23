@@ -1,3 +1,6 @@
+## [2.0.2+1] December 23, 2021
+- Updated README
+
 ## [2.0.2] December 23, 2021
 - Removed dependency on Flutter SDK (this package is now a pure Dart package)
 - Removed pubspec.lock from repo
