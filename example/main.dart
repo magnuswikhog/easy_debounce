@@ -19,7 +19,7 @@ void main() async {
         EasyDebounce.debounce('debouncer1', Duration(milliseconds: 200), () => myMethod('Executing debouncer1! (i: $i)'));
     }
 
-    // Make sure the above example finishes before continuting
+    // Make sure the above example finishes before continuing
     await Future.delayed(Duration(milliseconds: 400));
 
 
@@ -33,7 +33,7 @@ void main() async {
     }
 
 
-    // Make sure the above example finishes before continuting
+    // Make sure the above example finishes before continuing
     await Future.delayed(Duration(milliseconds: 400));
 
 
@@ -48,7 +48,7 @@ void main() async {
     }
 
 
-    // Make sure the above example finishes before continuting
+    // Make sure the above example finishes before continuing
     await Future.delayed(Duration(milliseconds: 400));
 
 
@@ -62,7 +62,7 @@ void main() async {
     print('After debouncer5: x: $x');
 
 
-    // Make sure the above example finishes before continuting
+    // Make sure the above example finishes before continuing
     await Future.delayed(Duration(milliseconds: 400));
 
 
@@ -77,7 +77,7 @@ void main() async {
     print('After debouncer6: y: $y');
 
 
-    // Make sure the above example finishes before continuting
+    // Make sure the above example finishes before continuing
     await Future.delayed(Duration(milliseconds: 400));
 
 
@@ -95,7 +95,7 @@ void main() async {
     print('After debouncer7: z: $z');
 
 
-    // Make sure the above example finishes before continuting
+    // Make sure the above example finishes before continuing
     await Future.delayed(Duration(milliseconds: 400));
 
 
