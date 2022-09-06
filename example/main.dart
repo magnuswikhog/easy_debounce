@@ -13,7 +13,7 @@ void main() async {
         () => myMethod('Executing debouncer1! (i: $i)'));
   }
 
-  // Make sure the above example finishes before continuting
+  // Make sure the above example finishes before continuing
   await Future.delayed(Duration(milliseconds: 400));
 
   // Example 2
@@ -26,7 +26,7 @@ void main() async {
     await Future.delayed(Duration(milliseconds: 300)); // Wait 300 ms
   }
 
-  // Make sure the above example finishes before continuting
+  // Make sure the above example finishes before continuing
   await Future.delayed(Duration(milliseconds: 400));
 
   // Example 3
@@ -41,7 +41,7 @@ void main() async {
         () => myMethod('Executing debouncer4! (i: $i)'));
   }
 
-  // Make sure the above example finishes before continuting
+  // Make sure the above example finishes before continuing
   await Future.delayed(Duration(milliseconds: 400));
 
   // Example 4
