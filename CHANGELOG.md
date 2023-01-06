@@ -1,3 +1,6 @@
+## [2.0.3]
+- Added throttler (credits to James McIntosh)
+
 ## [2.0.2+1] December 23, 2021
 - Updated README
 

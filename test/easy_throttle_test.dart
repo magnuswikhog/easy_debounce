@@ -83,6 +83,24 @@ void main() {
     EasyThrottle.throttle('first-call', Duration(milliseconds: 300), () => onExecute(5));
   });
 
+  test('onAfter (if specified) is invoked after the throttler has finished', () async {
+    DateTime start = DateTime.now();
+
+    var onExecute = expectAsync1((int i) {
+      expect(i, 1);
+    }, count: 1);
+
+    var onAfter = expectAsync0(() {
+      Duration startStopDiff = DateTime.now().difference(start);
+      int actualExpectedDiffMs = (startStopDiff.inMilliseconds.abs() - 1000).abs();
+      expect(actualExpectedDiffMs < 100, true); // 100 ms is reasonable
+    }, count: 1);
+
+    EasyThrottle.throttle('first-call', Duration(milliseconds: 1000), () => onExecute(1), onAfter: onAfter);
+    EasyThrottle.throttle('first-call', Duration(milliseconds: 1000), () => onExecute(2), onAfter: onAfter);
+    EasyThrottle.throttle('first-call', Duration(milliseconds: 1000), () => onExecute(3), onAfter: onAfter);
+  });
+
   test('zero-duration is a valid duration', () async {
     var onExecute = expectAsync0(() {}, count: 1);
     EasyThrottle.throttle('zero-duration', Duration.zero, () => onExecute());
