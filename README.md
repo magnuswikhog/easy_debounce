@@ -1,6 +1,6 @@
 # easy_debounce
 
-An extremely easy-to-use method call **debouncer** and **throttler** package for Dart/Flutter.
+An extremely easy-to-use method call **debouncer**, **throttler**, **rate limiter** package for Dart/Flutter.
 
 #### Debouncing
 Debouncing is needed when there is a possibility of multiple calls to a method being made within a short duration of each other, and it's desireable that only the last of those calls actually invoke the target method.
@@ -10,6 +10,10 @@ So basically each call starts a timer, and if another call happens before the ti
 
 #### Throttling
 Throttling is sort of the opposite of debouncing - only the first call to a method actually invokes the method, and any subsequent calls that are made within a specified duration are ignored. This can be useful to throttle presses on a refresh button for example.
+
+
+#### Rate limiting
+Rate limiting is similar to throttling - the first call to a method actually invokes the method, and any subsequent calls that are made within a specified duration are recorded and the once the duration has elapsed then the last call will be executed. This can be useful to rate limit progress updates as you want the first, last and periodic updates in between.
 
 
 ## Usage
@@ -83,4 +87,36 @@ You can get the number of active throttlers (throttlers which are still ignoring
 
     print('Active throttlers: ${EasyThrottle.count()}'); 
 
+
+
+### Rate Limiting
+Use the rate limiter by calling `rateLimit`:
+
+    EasyRateLimit.rateLimit(
+        'my-ratelimiter',               // <-- An ID for this particular rate limiter
+        Duration(milliseconds: 500),    // <-- The rate limiter duration
+        () => myMethod()                // <-- The target method
+        onAfter: (){ ... }              // <-- Optional callback, called after the duration has passed 
+    );
+
+The above call will invoke `myMethod()` once, and any subsequent calls to `rateLimit()` with the same `tag` within 500 ms are recorded, after 500 ms has elapsed the last call will be executed until no calls have been made within the subsequent 500 ms durations. A `tag` identifies this particular rate limiter, which means you can have multiple different rate limiters running concurrently and independent of each other.
+
+The `onAfter` callback will be invoked on duration after the rate limiter has no calls to execute.
+
+#### Cancelling a rate limiter
+
+A rate limiter which is waiting for the duration to pass can be called by calling `cancel()` with the rate limiter `tag`:
+
+    EasyRateLimit.cancel('my-ratelimiter');
+
+To cancel all active rate limiters, call `cancelAll()`:
+
+    EasyRateLimit.cancelAll();
+
+
+#### Counting active rate limiter
+
+You can get the number of active rate limiters (rate limiters which are still ignoring subsequent calls to their target methods) by calling `count()`:
+
+    print('Active rate limiters: ${EasyRateLimit.count()}'); 
 
